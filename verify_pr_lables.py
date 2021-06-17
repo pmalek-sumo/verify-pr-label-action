@@ -225,23 +225,27 @@ else:
 # or exit with an error code. This is done independently of the presence of
 # invalid labels above.
 if not pr_valid_labels:
-    print('Error! This pull request does not contain any of the valid labels: '
-          f'{valid_labels}', file=sys.stderr)
-
-    # If reviews are disable, exit with an error code.
-    if pr_reviews_disabled:
-        print('Exiting with an error code')
-        sys.exit(1)
-
-    # If there has been already a request for changes due to missing a valid
-    # label, then don't request changes again.
-    if review_missing_label:
-        print('The last review already requested changes')
+    if len(valid_labels) == 0:
+        print('OK: no valid labels specified on the PR but also none configured'
+              'to be expected')
     else:
-        pr.create_review(
-            body='This pull request does not contain a valid label. Please '
-                 f'add one of the following labels: `{valid_labels}`',
-            event='REQUEST_CHANGES')
+        print('Error! This pull request does not contain any of the valid labels: '
+              f'{valid_labels}', file=sys.stderr)
+
+        # If reviews are disable, exit with an error code.
+        if pr_reviews_disabled:
+            print('Exiting with an error code')
+            sys.exit(1)
+
+        # If there has been already a request for changes due to missing a valid
+        # label, then don't request changes again.
+        if review_missing_label:
+            print('The last review already requested changes')
+        else:
+            pr.create_review(
+                body='This pull request does not contain a valid label. Please '
+                     f'add one of the following labels: `{valid_labels}`',
+                event='REQUEST_CHANGES')
 else:
     print('This pull request contains the following valid labels: '
           f'{pr_valid_labels}')
