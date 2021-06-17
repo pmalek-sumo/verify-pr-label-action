@@ -125,6 +125,8 @@ pr_valid_labels = []
 # This is a list of invalid labels found in the pull request
 pr_invalid_labels = []
 
+print('PR labels: '
+      f'{pr_labels}')
 # Check which of the label in the pull request, are in the
 # list of valid labels
 for label in pr_labels:
@@ -225,7 +227,7 @@ else:
 # or exit with an error code. This is done independently of the presence of
 # invalid labels above.
 if not pr_valid_labels:
-    if len(valid_labels) == 0:
+    if len(valid_labels) == 0 || (len(valid_labels) == 1 && valid_labels[0] == ''):
         print('OK: no valid labels specified on the PR but also none configured'
               'to be expected')
     else:
