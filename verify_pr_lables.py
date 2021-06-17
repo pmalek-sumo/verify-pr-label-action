@@ -226,7 +226,7 @@ else:
 # invalid labels above.
 if not pr_valid_labels:
     if len(valid_labels) == 0 or (len(valid_labels) == 1 and valid_labels[0] == ''):
-        print('OK: no valid labels specified on the PR but also none configured'
+        print('OK: no valid labels specified on the PR but also none configured '
               'to be expected')
     else:
         print('Error! This pull request does not contain any of the valid labels: '
@@ -253,7 +253,7 @@ else:
 # Finally, we check if all labels are OK, and generate a review if needed,
 # or exit without an error code. This condition is complimentary to the other
 # two conditions above.
-if not pr_invalid_labels and (pr_valid_labels or ( not pr_valid_labels and (len(valid_labels) == 1 and valid_labels[0] == ''))):
+if not pr_invalid_labels and (pr_valid_labels or (len(valid_labels) == 1 and valid_labels[0] == '')):
     print('All labels are OK in this pull request')
 
     # If reviews are disable, exit without an error code.
