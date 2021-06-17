@@ -125,8 +125,6 @@ pr_valid_labels = []
 # This is a list of invalid labels found in the pull request
 pr_invalid_labels = []
 
-print('PR labels: '
-      f'{pr_labels}')
 # Check which of the label in the pull request, are in the
 # list of valid labels
 for label in pr_labels:
@@ -255,7 +253,7 @@ else:
 # Finally, we check if all labels are OK, and generate a review if needed,
 # or exit without an error code. This condition is complimentary to the other
 # two conditions above.
-if not pr_invalid_labels and pr_valid_labels:
+if not pr_invalid_labels and (pr_valid_labels or ( not pr_valid_labels and (len(valid_labels) == 1 and valid_labels[0] == ''))):
     print('All labels are OK in this pull request')
 
     # If reviews are disable, exit without an error code.
