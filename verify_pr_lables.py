@@ -227,7 +227,7 @@ else:
 # or exit with an error code. This is done independently of the presence of
 # invalid labels above.
 if not pr_valid_labels:
-    if len(valid_labels) == 0 || (len(valid_labels) == 1 && valid_labels[0] == ''):
+    if len(valid_labels) == 0 or (len(valid_labels) == 1 and valid_labels[0] == ''):
         print('OK: no valid labels specified on the PR but also none configured'
               'to be expected')
     else:
